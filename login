@@ -33,6 +33,20 @@ public class login {
 
             // Tunggu 5 saat sebelum quit driver supaya sempat tengok inventory page
             Thread.sleep(5000);
+            
+            driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+            driver.findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
+            driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
+            
+            boolean isBackpackAdded = driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed();
+            boolean isTshirtAdded = driver.findElement(By.id("remove-sauce-labs-bolt-t-shirt")).isDisplayed();
+            boolean isOnesieAdded = driver.findElement(By.id("remove-sauce-labs-onesie")).isDisplayed();
+
+            if (!isBackpackAdded || !isTshirtAdded || !isOnesieAdded){
+                throw new IllegalStateException("One or more items failed to add to cart!");
+            }
+            System.out.println("All items added successfully.");
+
 
         } catch (InterruptedException e) {
             e.printStackTrace();
