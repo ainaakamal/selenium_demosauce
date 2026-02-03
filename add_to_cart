@@ -32,11 +32,13 @@ public class login {
             System.out.println("Login successful, assertion passed.");
 
             // Tunggu 5 saat sebelum quit driver supaya sempat tengok inventory page
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             
             driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
             driver.findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
             driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
+            
+            Thread.sleep(3000);
             
             boolean isBackpackAdded = driver.findElement(By.id("remove-sauce-labs-backpack")).isDisplayed();
             boolean isTshirtAdded = driver.findElement(By.id("remove-sauce-labs-bolt-t-shirt")).isDisplayed();
@@ -46,6 +48,8 @@ public class login {
                 throw new IllegalStateException("One or more items failed to add to cart!");
             }
             System.out.println("All items added successfully.");
+            
+            Thread.sleep(2000);
 
 
         } catch (InterruptedException e) {
