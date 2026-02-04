@@ -1,0 +1,23 @@
+package ecommerce;
+
+public class Main {
+    public static void main(String[] args) {
+        // Step 1: Login
+        Login login = new Login();
+        login.setupDriver();
+        login.login("standard_user", "secret_sauce");
+
+        // Step 2: Add item to cart
+        AddToCart cart = new AddToCart(login.driver);
+        cart.addItem("Laptop");
+        System.out.println("Item added to cart: " + cart.verifyItemInCart("Laptop"));
+
+        // Step 3: Checkout
+        Checkout checkout = new Checkout(login.driver);
+        checkout.finishCheckout();
+        System.out.println("Checkout complete: " + checkout.verifyCheckoutComplete());
+
+        // Close driver
+        login.closeDriver();
+    }
+}
