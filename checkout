@@ -1,10 +1,11 @@
-package add_to_cart;
+package demosauce_test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.WebElement;
 
-public class login {
+public class checkout {
 
     public static void main(String[] args) {
 
@@ -34,6 +35,7 @@ public class login {
             // Tunggu 5 saat sebelum quit driver supaya sempat tengok inventory page
             Thread.sleep(3000);
             
+            //add to cart
             driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
             driver.findElement(By.id("add-to-cart-sauce-labs-bolt-t-shirt")).click();
             driver.findElement(By.id("add-to-cart-sauce-labs-onesie")).click();
@@ -50,8 +52,29 @@ public class login {
             System.out.println("All items added successfully.");
             
             Thread.sleep(2000);
+            
+          //checkout
+          driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
+          driver.findElement(By.id("checkout")).click();
+          
+          //Enter detail
+          driver.findElement(By.id("first-name")).sendKeys("standard");
+          driver.findElement(By.id("last-name")).sendKeys("user");
+          driver.findElement(By.id("postal-code")).sendKeys("47150");
+          driver.findElement(By.id("continue")).click();
 
+          driver.findElement(By.id("finish")).click();
+          
+          WebElement message = driver.findElement(By.xpath("//h2[@class='complete-header']"));
+          String text = message.getText();
 
+          if (text.contains("Thank you for your order!")) {
+              System.out.println("Checkout: Complete!");
+          } else {
+              System.out.println("Order confirmation message not found!");
+          }
+
+       
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
