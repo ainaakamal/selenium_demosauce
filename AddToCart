@@ -1,0 +1,22 @@
+package ecommerce;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class AddToCart extends Login {
+
+    public AddToCart(WebDriver driver) {
+        this.driver = driver; // reuse driver dari Login
+    }
+
+    public void addItem(String itemName) {
+        // contoh klik pada item
+        driver.findElement(By.xpath("//div[text()='" + itemName + "']")).click();
+        driver.findElement(By.id("addToCart")).click();
+    }
+
+    public boolean verifyItemInCart(String itemName) {
+        driver.findElement(By.id("cart")).click();
+        return driver.findElement(By.xpath("//div[@class='cart-item' and text()='" + itemName + "']")).isDisplayed();
+    }
+}
